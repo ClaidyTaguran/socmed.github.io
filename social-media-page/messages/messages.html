@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Feed</title>
+    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../socmed/style.css">
+    <style>
+        .rounded-circle-lg {
+            width: 4rem;
+            height: auto;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .rounded-circle-profile {
+            width: 4rem;
+            height: auto;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .post-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .post-btn {
+            background-color: #2d2d2d;
+            color: white;
+        }
+        .status-badge {
+            font-size: 12px;
+            color: #28a745;
+        }
+        .status-badge-senior {
+            font-size: 12px;
+            color: yellow;
+        }
+        .top-bar {
+        position: fixed;
+        top: 0;
+        left: 100px; /* Default for collapsed sidebar */
+        right: 0;
+        z-index: 1000;
+        background-color: #0b1b2b;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: left 0.35s ease-in-out, width 0.35s ease-in-out;
+        }
+
+        .container-fluid {
+        margin-top: 80px; /* Prevent content from overlapping with the top bar */
+        transition: margin-left 0.35s ease-in-out;
+        }
+        .conversation-box {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            height: 100%;
+        }
+        .friend-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .friend-item:hover {
+            background: #f0f0f0;
+        }
+        .chat-message {
+            display: inline-block;
+            max-width: 80%;
+            background: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .conversation-box {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            height: 400px;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .chat-message {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .chat-message.me {
+            background: #0b1b2b;
+            color: white;
+            text-align: right;
+            float: right;
+        }
+        .message-time {
+            display: block;
+            font-size: 0.75rem;
+            color: gray;
+            margin-top: 5px;
+        }
+
+        .friend-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .friend-item:hover {
+            background: #f0f0f0;
+        }
+        .conversation-placeholder {
+            text-align: center;
+            padding: 5rem;
+        }
+        .message-summary {
+            font-size: 0.85rem;
+            color: gray;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+        <!-- Main Content -->
+        <div class="container-fluid p-4">
+            <!-- Top Bar -->
+            <div class="top-bar d-flex justify-content-between align-items-center mb-4">
+                <div class="input-group" style="max-width: 300px;">
+                    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass fa-bounce"></i></span>
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="me-3 text-end">
+                        <p class="mb-0">Jeriebel Bulac Calunsag</p>
+                        <span class="status-badge">Student</span>
+                    </div>
+                    <img src="../socmed/img/jebel.jpg" class="rounded-circle-profile me-3" alt="User">
+                    
+                    <!-- Notifications Button -->
+                    <div class="position-relative me-3">
+                        <button class="btn btn-light position-relative" id="notificationBtn">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+                        </button>
+                        <div class="notification-dropdown bg-white text-dark p-3 shadow rounded d-none position-absolute" style="top: 45px; right: 0; width: 300px;">
+                            <h6>Notifications</h6>
+                            <hr>
+                            <div class="notification-item mb-2">
+                                <p class="mb-0"><strong>Don Allen</strong> liked your post.</p>
+                                <small class="text-muted">5 mins ago</small>
+                            </div>
+                            <div class="notification-item mb-2">
+                                <p class="mb-0"><strong>Claidy Taguran</strong> commented on your post.</p>
+                                <small class="text-muted">10 mins ago</small>
+                            </div>
+                            <div class="notification-item">
+                                <p class="mb-0"><strong>Kyle Grapa</strong> followed you.</p>
+                                <small class="text-muted">30 mins ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+                    <script>
+                        document.getElementById('notificationBtn').addEventListener('click', function () {
+                        const notificationDropdown = document.querySelector('.notification-dropdown');
+                        notificationDropdown.classList.toggle('d-none');
+                        });
+
+                    </script>
+            
+
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-8">
+                    <!-- Followers Section -->
+                    <div class="card p-3 mb-3">
+                        <h5>Followers</h5>
+                        <div class="d-flex overflow-auto" style="scrollbar-width: none;">
+                            <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/benjie.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/conarco.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/kenneth.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/keith.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/kim.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/kyle.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/kyt.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/eugene.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/don.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            <img src="../socmed/img/claidy.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                            
+                        </div>
+                    </div>
+                    <!-- Left Column -->
+                <div class="card p-3">
+                    <div class="conversation-placeholder">
+                        <i class="fa-regular fa-comments fa-beat-fade" style="font-size: 12rem; color: #0b1b2b;"></i>
+                        <p class="mt-3">Select a conversation to start messaging</p>
+                    </div>
+                    <div class="conversation-box">
+                        <i class="fa-regular fa-rectangle-xmark close-btn"></i>
+                        <h5 id="friendName">Friend Name</h5>
+                        <div id="chatHistory" class="mb-3" style="height: 250px; overflow-y: auto;">
+                            <div class="chat-message">Hi! How are you doing?</div>
+                            <div class="chat-message me">I'm doing great! What about you?</div>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="messageInput" class="form-control" placeholder="Type a message...">
+                            <button class="btn btn-primary" id="sendMessageBtn">Send</button>
+                        </div>
+                    </div>
+                </div>
+           
+                </div>
+            <!-- Right Column -->
+            <div class="col-md-4">
+                <h5>Messages</h5>
+                <div id="friendList">
+                    <div class="friend-item" data-friend="Kyle Grapa">
+                        <img src="../socmed/img/kyle.jpg" class="rounded-circle-lg me-2" alt="Kyle"> 
+                        <div>
+                            <strong>Kyle Grapa</strong>
+                            <p class="message-summary">Hi Jeriebel, how are you?</p>
+                        </div>
+                    </div>
+                    <div class="friend-item" data-friend="John Michael Conarco">
+                        <img src="../socmed/img/conarco.jpg" class="rounded-circle-lg me-2" alt="John"> 
+                        <div>
+                            <strong>John Michael Conarco</strong>
+                            <p class="message-summary">Hoyyyyyy!!!</p>
+                        </div>
+                    </div>
+                    <div class="friend-item" data-friend="Kenneth Ed Olaivar">
+                        <img src="../socmed/img/kenneth.jpg" class="rounded-circle-lg me-2" alt="Kenneth"> 
+                        <div>
+                            <strong>Kenneth Ed Olaivar</strong>
+                            <p class="message-summary">Hoyyyyyy!!!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    const friendList = document.querySelectorAll('.friend-item');
+const conversationBox = document.querySelector('.conversation-box');
+const placeholder = document.querySelector('.conversation-placeholder');
+const chatHistory = document.getElementById('chatHistory');
+const friendName = document.getElementById('friendName');
+const messageInput = document.getElementById('messageInput');
+const sendMessageBtn = document.getElementById('sendMessageBtn');
+const closeBtn = document.querySelector('.close-btn');
+
+friendList.forEach(friend => {
+    friend.addEventListener('click', () => {
+        placeholder.style.display = 'none';
+        conversationBox.style.display = 'block';
+        friendName.innerText = friend.dataset.friend;
+        chatHistory.innerHTML = '';  // Clear the chat history for each new conversation
+
+        // Sample chat messages
+        appendMessage('Hi ' + friend.dataset.friend + ', how are you?', 'other', '9:58 AM');
+        appendMessage("I'm doing great!", 'me', '10:00 AM');
+    });
+});
+
+sendMessageBtn.addEventListener('click', () => {
+    const message = messageInput.value.trim();
+    if (message) {
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+        appendMessage(message, 'me', currentTime);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+        messageInput.value = '';
+    }
+});
+
+closeBtn.addEventListener('click', () => {
+    conversationBox.style.display = 'none';
+    placeholder.style.display = 'block';
+});
+
+function appendMessage(message, sender, time) {
+    const messageWrapper = document.createElement('div');
+    messageWrapper.classList.add('d-flex', sender === 'me' ? 'justify-content-end' : 'justify-content-start', 'mb-2');
+
+    const messageContent = document.createElement('div');
+    messageContent.classList.add('chat-message', sender);
+    messageContent.innerHTML = `
+        <div>${message}</div>
+        <span class="message-time">${time}</span>
+    `;
+
+    messageWrapper.appendChild(messageContent);
+    chatHistory.appendChild(messageWrapper);
+}
+</script>
+    <script src="../socmed/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
