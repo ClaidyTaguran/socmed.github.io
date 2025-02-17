@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CompED - Authentication</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #112D57;
+        }
+
+        .container-fluid {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-col, .right-col {
+            height: 100vh;
+            width: 50%;
+            transition: transform 0.7s ease-in-out;
+        }
+
+        .left-col {
+            background-color: #112D57;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .compesa-logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 120px;
+        }
+
+        .comped-logo {
+            width: 60%;
+            max-width: 350px;
+            margin-top: 80px;
+        }
+
+        .comped-text {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            max-width: 80%;
+        }
+
+        .right-col {
+            background-color: white;
+            display: flex;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 80px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            width: 50%;
+            z-index: 1;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 25px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #252525;
+            color: white;
+            border: none;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #004bd6;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        /* Swapping effect */
+        .container-fluid.switch .left-col {
+            transform: translateX(100%);
+        }
+
+        .container-fluid.switch .right-col {
+            transform: translateX(-100%);
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+        }
+        .status-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .status-buttons .btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 10px;
+            border: 2px solid #000;
+            transition: background-color 0.3s, transform 0.2s;
+            min-width: 130px;
+            text-align: center;
+        }
+
+        .status-buttons .btn i {
+            font-size: 1.2rem;
+        }
+
+        .status-buttons .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .student-btn {
+            background-color: #28a745;
+            color: white;
+            border-color: #0b571d;
+        }
+
+        .student-btn.active, .student-btn:focus {
+            background-color: #186618;
+        }
+
+        .adviser-btn {
+            background-color: #007bff;
+            color: white;
+            border-color: #124377;
+        }
+
+        .adviser-btn.active, .adviser-btn:focus {
+            background-color: #19426b;
+        }
+
+        .officer-btn {
+            background-color: #ffc107;
+            color: white;
+            border-color: #896d1b;
+        }
+
+        .officer-btn.active, .officer-btn:focus {
+            background-color: #77631e;
+        }
+
+        .officer-role, .year-level, .rfid-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .officer-role select, .year-level select, .rfid-container input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background: white;
+            font-size: 1rem;
+            appearance: none;
+            cursor: pointer;
+            transition: border 0.3s;
+        }
+
+        .officer-role select:hover, .year-level select:hover, .rfid-container input:hover {
+            border: 1px solid #007bff;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: gray;
+            pointer-events: none;
+        }
+
+        .officer-role {
+            display: none;
+        }
+
+        /* Show Officer Roles when selected */
+        .officer-selected .officer-role {
+            display: block;
+        }
+
+        .terms-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .terms-container input {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Buttons alignment using Bootstrap grid */
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .form-buttons .btn {
+            flex: 1;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .complete-btn {
+            background-color: #252525;
+            color: white;
+            font-weight: bold;
+        }
+
+        .complete-btn:hover {
+            background-color: #004bd6;
+        }
+
+
+        /* Apply transition only on larger screens */
+        @media (min-width: 993px) {
+            .left-col, .right-col {
+                transition: transform 0.7s ease-in-out;
+            }
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .container-fluid {
+                flex-direction: column;
+                height: auto;
+                width: 100%;
+            }
+
+            .left-col {
+                width: 100%;
+                height: 50vh;
+                padding: 20px;
+            }
+
+            .compesa-logo {
+                width: 100px;
+                position: relative;
+                left: 0;
+                margin-bottom: 15px;
+            }
+
+            .comped-logo {
+                width: 70%;
+                margin-top: 20px;
+            }
+
+            .right-col {
+                width: 100%;
+                height: auto;
+                padding: 40px;
+                margin-top: 15px;
+                margin-bottom: 2px;
+                position: relative;
+                right: 0;
+            }
+            
+            /* Swapping effect */
+            .container-fluid.switch .left-col {
+                transform: translateY(0%);
+                }
+
+            .container-fluid.switch .right-col {
+                transform: translateY(0%);
+                }
+            }
+
+        @media (max-width: 576px) {
+            .compesa-logo {
+                width: 80px;
+            }
+
+            .comped-logo {
+                width: 80%;
+            }
+
+            .right-col {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid" id="authContainer">
+        <!-- Left Section (Logo & Text) -->
+        <div class="left-col">
+            <img src="img/compesa.png" alt="Compesa Logo" class="compesa-logo">
+            <img src="img/comped.png" alt="CompED Logo" class="comped-logo">
+            <p class="comped-text">A Social Media Platform for Collaborative Learning and Event Management.</p>
+        </div>
+
+        <!-- Right Section (Forms) -->
+        <div class="right-col">
+            <div class="form-container" id="loginForm">
+                <h1>Log into your Account</h1>
+                <form id="login">
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p class="mt-3">Don't have an account? <a href="#" class="fw-bold text-decoration-none register-link" onclick="toggleForm()">Register</a></p>
+            </div>
+
+            <div class="form-container d-none" id="signupForm">
+                <h1>Create Your Account</h1>
+                <form id="signup">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="password" placeholder="Password" required>
+                    <input type="password" placeholder="Confirm Password" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <p class="mt-3">Already have an account? <a href="#" class="fw-bold text-decoration-none login-link" onclick="toggleForm()">Login</a></p>
+            </div>
+            <div class="form-container extended-form d-none" id="extendedForm">
+                <h1>Create Your Account</h1>
+                <form id="extendedSignup">
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between status-buttons">
+                        <button type="button" class="btn student-btn" id="studentBtn">
+                            <i class="fas fa-user-graduate"></i> Student/<br>Alumni
+                        </button>
+                        <button type="button" class="btn adviser-btn" id="adviserBtn">
+                            <i class="fas fa-chalkboard-teacher"></i> Adviser
+                        </button>
+                        <button type="button" class="btn officer-btn" id="officerBtn">
+                            <i class="fas fa-user-cog"></i> Officer
+                        </button>
+                    </div>
+            
+                    <!-- RFID Input -->
+                    <div class="rfid-container">
+                        <input type="text" id="rfid" placeholder="Enter RFID" required>   
+                    </div>
+            
+                    <!-- Year Level Selection -->
+                    <div class="year-level">
+                        
+                        <div class="select-wrapper">
+                            <select id="yearLevel" required>
+                                <option value="">Select Year Level</option>
+                                <option value="1st">1st Year</option>
+                                <option value="2nd">2nd Year</option>
+                                <option value="3rd">3rd Year</option>
+                                <option value="4th">4th Year</option>
+                                <option value="5th">5th Year</option>
+                            </select>
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+            
+                    <!-- Terms and Conditions -->
+                    <div class="terms-container">
+                        <input type="checkbox" required>
+                        <label>Accept Terms and Conditions</label>
+                    </div>
+            
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end form-buttons">
+                        <button type="submit" class="btn complete-btn">Complete Registration</button>
+                    </div>
+                </form>
+            </div>                   
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleForm() {
+            document.getElementById("authContainer").classList.toggle("switch");
+            setTimeout(() => {
+                document.getElementById("loginForm").classList.toggle("d-none");
+                document.getElementById("signupForm").classList.toggle("d-none");
+            }, 350); // Syncs with the transition
+        }
+
+        document.getElementById("login").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Login Successful!");
+            window.location.href = "../socmed/socmed.html"; // Redirect to social media feed
+        });
+
+        document.getElementById("signup").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Account created successfully! Proceeding to additional details.");
+            document.getElementById("signupForm").classList.add("d-none");
+            document.getElementById("extendedForm").classList.remove("d-none");
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const studentBtn = document.getElementById("studentBtn");
+        const adviserBtn = document.getElementById("adviserBtn");
+        const officerBtn = document.getElementById("officerBtn");
+        const selectedStatus = document.getElementById("selectedStatus");
+        const officerRole = document.querySelector(".officer-role");
+
+            function resetButtons() {
+                studentBtn.classList.remove("active");
+                adviserBtn.classList.remove("active");
+                officerBtn.classList.remove("active");
+                officerRole.style.display = "none";
+            }
+
+            studentBtn.addEventListener("click", function () {
+                resetButtons();
+                studentBtn.classList.add("active");
+                selectedStatus.value = "student";
+            });
+
+            adviserBtn.addEventListener("click", function () {
+                resetButtons();
+                adviserBtn.classList.add("active");
+                selectedStatus.value = "adviser";
+            });
+
+            officerBtn.addEventListener("click", function () {
+                resetButtons();
+                officerBtn.classList.add("active");
+                selectedStatus.value = "officer";
+                officerRole.style.display = "block";
+            });
+
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const authContainer = document.getElementById("authContainer");
+        const rightCol = document.querySelector(".right-col");
+
+        function adjustBorderRadius() {
+        if (window.innerWidth > 992) {
+            if (authContainer.classList.contains("switch")) {
+                rightCol.style.borderTopLeftRadius = "0px";
+                rightCol.style.borderBottomLeftRadius = "0px";
+                rightCol.style.borderTopRightRadius = "80px";
+                rightCol.style.borderBottomRightRadius = "80px";
+            } else {
+                rightCol.style.borderTopLeftRadius = "80px";
+                rightCol.style.borderBottomLeftRadius = "80px";
+                rightCol.style.borderTopRightRadius = "0px";
+                rightCol.style.borderBottomRightRadius = "0px";
+            }
+        } 
+    }
+
+    document.querySelectorAll(".register-link, .login-link").forEach(button => {
+        button.addEventListener("click", function () {
+            setTimeout(adjustBorderRadius, 350); // Matches transition time
+            });
+        });
+
+        // Adjust on resize
+        window.addEventListener("resize", adjustBorderRadius);
+        adjustBorderRadius(); // Call initially to set proper styles on load
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select the extended registration form
+            const extendedSignupForm = document.getElementById("extendedSignup");
+
+            // Add event listener to handle form submission
+            extendedSignupForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent default form submission
+                alert("Registration Completed! Redirecting to your dashboard...");
+                window.location.href = "../socmed/socmed.html"; // Redirect to socmed.html
+            });
+        });
+   
+    </script>
+    </body>
+</html>
