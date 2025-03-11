@@ -60,3 +60,34 @@ function initializeSidebar() {
 
 document.addEventListener("DOMContentLoaded", loadSidebar);
 document.addEventListener("DOMContentLoaded", initializeSidebar);
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+      document.querySelectorAll('.toggle-dark-mode').forEach(btn => {
+          btn.classList.add('btn-dark');
+          btn.classList.remove('btn-light');
+      });
+      document.querySelectorAll('.card').forEach(card => {
+          card.classList.add('card-dark');
+      });
+  }
+});
+
+document.getElementById('themeToggle').addEventListener('click', function () {
+  document.body.classList.toggle('dark-mode');
+  document.querySelectorAll('.toggle-dark-mode').forEach(btn => {
+      btn.classList.toggle('btn-dark');
+      btn.classList.toggle('btn-light');
+  });
+  document.querySelectorAll('.card').forEach(card => {
+      card.classList.toggle('card-dark');
+  });
+  
+  if (document.body.classList.contains('dark-mode')) {
+      localStorage.setItem('darkMode', 'enabled');
+  } else {
+      localStorage.setItem('darkMode', 'disabled');
+  }
+});
+ 
