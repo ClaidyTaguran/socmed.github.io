@@ -221,7 +221,7 @@ body.dark-mode .card-dark {
             left: 100px; /* Default when sidebar is collapsed */
             right: 0;
             z-index: 1050;
-            background-color: #0b1b2b;
+            background-color: #0e2238;
             padding: 1rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: left 0.35s ease-in-out, width 0.35s ease-in-out;
@@ -256,5 +256,3 @@ body.dark-mode .card-dark {
                 margin-top: 0; /* Space for top bar & sidebar */
             }
         }
-
-
