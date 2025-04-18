@@ -1,66 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media Feed</title>
-    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../socmed/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Feed</title>
+  <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../socmed/style.css">
+  <style>
+    /* Notification styles */
+    .notification-dropdown {
+      max-height: 400px;
+      overflow-y: auto;
+      width: 360px;
+    }
+    .notification-header {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .notification-item {
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+    }
+    .notification-item:hover {
+      background-color: #f0f2f5;
+      cursor: pointer;
+    }
+    .notification-item small {
+      color: #65676b;
+    }
+    .notification-status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background-color: #1877f2;
+      color: white;
+      margin-left: 6px;
+    }
+    .notification-item.read {
+      opacity: 0.6;
+    }
+    .top-bar .fa-bell {
+      font-size: 1.25rem;
+    }
+    .notif-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .notif-tabs button {
+      background: none;
+      border: none;
+      font-weight: 600;
+      color: #1877f2;
+      cursor: pointer;
+    }
+    .notif-tabs button.active {
+      border-bottom: 2px solid #1877f2;
+    }
+  </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-container"></div>
-        <!-- Top Bar -->
-        <div class="top-bar d-flex justify-content-between align-items-center mb-4">
-            <div class="input-group" style="max-width: 300px;">
-                <span class="input-group-text"><i class="fa-solid fa-magnifying-glass fa-bounce"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
+  <div class="wrapper">
+    <div id="sidebar-container"></div>
+    <div class="top-bar d-flex justify-content-between align-items-center mb-4">
+      <div class="input-group" style="max-width: 300px;">
+        <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="me-3 text-end">
+          <p class="mb-0 fw-bold name-text">Jeriebel Bulac Calunsag</p>
+          <span class="status-badge">Student</span>
+        </div>
+        <img src="../socmed/img/jebel.jpg" class="rounded-circle-profile me-3" alt="User">
+        <div class="position-relative me-3">
+          <button class="btn btn-light position-relative" id="notificationBtn">
+            <i class="fa-solid fa-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notifCount">3</span>
+          </button>
+          <div id="notifDropdown" class="notification-dropdown bg-white text-dark p-3 shadow rounded d-none position-absolute" style="top: 45px; right: 0;">
+            <div class="notification-header mb-2">Notifications</div>
+            <div class="notif-tabs">
+              <button class="active" onclick="filterNotifications('all', this)">All</button>
+              <button onclick="filterNotifications('unread', this)">Unread</button>
             </div>
-            <div class="d-flex align-items-center">
-                <div class="me-3 text-end">
-                    <p class="mb-0 fw-bold name-text">Jeriebel Bulac Calunsag</p>
-                    <span class="status-badge">Student</span>
+            <hr>
+            <div id="notifList">
+              <div class="notification-item mb-2 d-flex gap-2" onclick="toggleRead(this)">
+                <img src="../socmed/img/don.jpg" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                  <p class="mb-1"><strong>Don Allen</strong> liked your post.<span class="notification-status">Unread</span></p>
+                  <small>5 mins ago</small>
                 </div>
-                
-                <img src="../socmed/img/jebel.jpg" class="rounded-circle-profile me-3" alt="User">
-                
-                <!-- Notifications Button -->
-                <div class="position-relative me-3">
-                    <button class="btn btn-light position-relative" id="notificationBtn">
-                        <i class="fa-solid fa-bell"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
-                    </button>
-                    <div class="notification-dropdown bg-white text-dark p-3 shadow rounded d-none position-absolute" style="top: 45px; right: 0; width: 300px;">
-                        <h6>Notifications</h6>
-                        <hr>
-                        <div class="notification-item mb-2">
-                            <p class="mb-0"><strong>Don Allen</strong> liked your post.</p>
-                            <small class="text-muted">5 mins ago</small>
-                        </div>
-                        <div class="notification-item mb-2">
-                            <p class="mb-0"><strong>Claidy Taguran</strong> commented on your post.</p>
-                            <small class="text-muted">10 mins ago</small>
-                        </div>
-                        <div class="notification-item">
-                            <p class="mb-0"><strong>Kyle Grapa</strong> followed you.</p>
-                            <small class="text-muted">30 mins ago</small>
-                        </div>
-                    </div>
-                    <button class="btn btn-light theme-toggle ms-3" id="themeToggle"><i class="fa-regular fa-moon"></i></button>
-                    
+              </div>
+              <div class="notification-item mb-2 d-flex gap-2" onclick="toggleRead(this)">
+                <img src="../socmed/img/claidy.jpg" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                  <p class="mb-1"><strong>Claidy Taguran</strong> commented on your post.<span class="notification-status">Unread</span></p>
+                  <small>10 mins ago</small>
                 </div>
+              </div>
+              <div class="notification-item d-flex gap-2" onclick="toggleRead(this)">
+                <img src="../socmed/img/kyle.jpg" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                  <p class="mb-1"><strong>Kyle Grapa</strong> followed you.<span class="notification-status">Unread</span></p>
+                  <small>30 mins ago</small>
+                </div>
+              </div>
             </div>
-        </div> 
-        <script>
-            document.getElementById('notificationBtn').addEventListener('click', function () {
-                const notificationDropdown = document.querySelector('.notification-dropdown');
-                notificationDropdown.classList.toggle('d-none');
-            });
-        </script>
-        <!-- Main Content -->
+          </div>
+          <button class="btn btn-light theme-toggle ms-3" id="themeToggle"><i class="fa-regular fa-moon"></i></button>
+        </div>
+      </div>
+    </div>
         <div class="container-fluid p-4">
             <div class="row">
                 <!-- Left Column -->
@@ -214,46 +271,78 @@
         </div>
     </div>
     <script>
-        function postStatus() {
-            const content = document.getElementById('postContent').value;
-            if (content.trim() === '') return;
-
-            const timeline = document.getElementById('timeline');
-            const post = document.createElement('div');
-            post.classList.add('post-box', 'position-relative');
-            post.innerHTML = `
-                <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
-                    <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
-                </button>
-                <div class="d-flex align-items-center">
-                    <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                    <div>
-                        <p class="mb-0"><strong>You</strong> <span class="text-muted">Student</span></p>
-                        <span class="status-badge">Student</span>
-                    </div>
-                </div>
-                <p class="mt-2">${content}</p>
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-light btn-sm"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
-                    <button class="btn btn-light btn-sm"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
-                    <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
-                </div>
-            `;
-            timeline.prepend(post);
-            document.getElementById('postContent').value = '';
-        }
-    </script>
-    <script>
-        //visit profile raniiiii testing
-        document.addEventListener('DOMContentLoaded', function () {
-            const profileImage = document.querySelector('img[src="../socmed/img/conarco.jpg"]');
-            if (profileImage) {
-                profileImage.addEventListener('click', function () {
-                    window.location.href = '../visitprofile/visitprofile.html';
-                });
-            }
+        // Notification dropdown toggle
+        document.getElementById('notificationBtn')?.addEventListener('click', function () {
+          document.getElementById('notifDropdown')?.classList.toggle('d-none');
         });
-    </script>
+    
+        // Mark as read/unread toggle
+        function toggleRead(element) {
+          element.classList.toggle('read');
+          const status = element.querySelector('.notification-status');
+          if (element.classList.contains('read')) {
+            status.textContent = 'Read';
+            status.style.backgroundColor = '#6c757d';
+          } else {
+            status.textContent = 'Unread';
+            status.style.backgroundColor = '#1877f2';
+          }
+        }
+    
+        // Filter notifications
+        function filterNotifications(type, btn) {
+          const buttons = document.querySelectorAll('.notif-tabs button');
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+    
+          const items = document.querySelectorAll('.notification-item');
+          items.forEach(item => {
+            if (type === 'all') {
+              item.style.display = 'flex';
+            } else if (type === 'unread') {
+              item.style.display = item.classList.contains('read') ? 'none' : 'flex';
+            }
+          });
+        }
+    
+        // Post new status
+        function postStatus() {
+          const content = document.getElementById('postContent')?.value;
+          if (!content || content.trim() === '') return;
+    
+          const timeline = document.getElementById('timeline');
+          const post = document.createElement('div');
+          post.classList.add('post-box', 'position-relative');
+          post.innerHTML = `
+            <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
+              <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
+            </button>
+            <div class="d-flex align-items-center">
+              <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <div>
+                <p class="mb-0"><strong>You</strong> <span class="text-muted">Student</span></p>
+                <span class="status-badge">Student</span>
+              </div>
+            </div>
+            <p class="mt-2">${content}</p>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-light btn-sm"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
+              <button class="btn btn-light btn-sm"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
+              <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
+            </div>`;
+    
+          timeline?.prepend(post);
+          document.getElementById('postContent').value = '';
+        }
+    
+        // Profile redirect for visit profile
+        document.addEventListener('DOMContentLoaded', function () {
+          const profileImage = document.querySelector('img[src="../socmed/img/conarco.jpg"]');
+          profileImage?.addEventListener('click', function () {
+            window.location.href = '../visitprofile/visitprofile.html';
+          });
+        });
+      </script>
     <script src="../socmed/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
