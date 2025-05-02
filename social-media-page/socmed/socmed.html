@@ -62,6 +62,80 @@
     .notif-tabs button.active {
       border-bottom: 2px solid #1877f2;
     }
+    
+    /* Comments section styles */
+    .comments-section {
+      border-top: 1px solid #e4e6eb;
+      padding-top: 12px;
+    }
+    .highlight-comment {
+      background-color: #f0f2f5;
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .all-comments {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .comment-item {
+      padding: 8px;
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+    .comment-item:hover {
+      background-color: #f0f2f5;
+    }
+    .view-comments {
+      color: #65676b;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .view-comments:hover {
+      text-decoration: underline;
+    }
+    .add-comment input {
+      background-color: #f0f2f5;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 12px;
+    }
+    .add-comment input:focus {
+      background-color: #e4e6eb;
+      box-shadow: none;
+    }
+    
+    /* Modal Post Styles */
+    .post-detail-container {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .modal-post-content {
+      border-bottom: 1px solid #e4e6eb;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+    .modal-comments-section {
+      padding: 15px 0;
+    }
+    .modal-comment-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f2f5;
+    }
+    .modal-comment-item:last-child {
+      border-bottom: none;
+    }
+    .modal-add-comment {
+      position: sticky;
+      bottom: 0;
+      background: white;
+      padding: 15px 0;
+      border-top: 1px solid #e4e6eb;
+    }
+    .modal-post-img {
+      max-height: 500px;
+      object-fit: contain;
+      background: #f0f2f5;
+    }
   </style>
 </head>
 <body>
@@ -118,232 +192,489 @@
         </div>
       </div>
     </div>
-        <div class="container-fluid p-4">
-            <div class="row">
-                <!-- Left Column -->
-                <div class="col-md-8">
-                    <!-- Followers Section -->
-                    <div class="card p-3 mb-3">
-                        <h5>Followers</h5>
-                        <div class="d-flex overflow-auto" style="scrollbar-width: none;">
-                            <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/benjie.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/conarco.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/kenneth.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/keith.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/kim.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/kyle.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/kyt.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/eugene.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/don.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <img src="../socmed/img/claidy.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                        </div>
-                    </div>
-                    <!-- Post Input Section -->
-                    <div class="post-box">
-                        <div class="d-flex align-items-center">
-                            <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                            <input type="text" class="form-control" placeholder="Share something..." id="postContent">
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <button class="btn btn-light btn-sm"><i class="fa-regular fa-file"></i> Files</button>
-                            <button class="btn btn-light btn-sm"><i class="fa-regular fa-image"></i> Photos</button>
-                            <button class="btn btn-light btn-sm"><i class="fa-solid fa-tag"></i> Tag</button>
-                            <button class="btn btn-light btn-sm"><i class="fa-solid fa-link"></i> Links</button>
-                            <button class="btn post-btn btn-sm" onclick="postStatus()">Post</button>
-                        </div>
-                    </div>
-                    <!-- Timeline Section -->
-                    <div id="timeline" class="mt-4">
-                        <div class="post-box position-relative">
-                            <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
-                                <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
-                            </button>
-                            
-                            <a href="../visitprofile/visitprofile.html" class="text-decoration-none text-dark">
-                            <div class="d-flex align-items-center">
-                                <img src="../socmed/img/conarco.jpg" class="rounded-circle-lg me-2" alt="Profile">
-                                <div>
-                                    <p class="mb-0 text-black"><strong>John Michael Conarco</strong></p>
-                                    <span class="status-badge-senior">Senior</span>
-                                </div>
-                            </div>
-                        </a>
-                            <p class="mt-2">Magbabalik ang nakaraan...<br>Umaasa...</p>
-                            <img src="../socmed/img/malupiton.jpg" class="img-fluid rounded mb-3" alt="Seminar Image">
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-light btn-sm"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
-                                <button class="btn btn-light btn-sm"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
-                                <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-                <!-- Right Column -->
-                <div class="right col-md-4">
-                    <h5 class="text-black">Suggestions</h5>
-                    <div class="suggestions-section overflow-auto" style="max-height: 250px; scrollbar-width: none;">
-                        <div class="d-flex flex-column">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/rumil.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Rumil Christian Seloveres <span class="status-badge">Student</span></p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/loraine.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Loraine Daque <span class="status-badge">Student</span><p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/rod.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Rod Capili <span class="status-badge">Student</span></p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/leo.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Leo Egam <span class="status-badge">Student</span></p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                            <!-- Additional suggestions will scroll -->
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/rumil.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Rumil Christian Seloveres <span class="status-badge">Student</span><p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/loraine.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Loraine Daque <span class="status-badge">Student</span><p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/rod.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Rod Capili <span class="status-badge">Student</span><p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="../socmed/img/leo.jpg" class="rounded-circle-lg me-2" alt="User">
-                                <div>
-                                    <p class="mb-0 text-black">Leo Egam <span class="status-badge">Student</span></p>
-                                    <button class="btn btn-primary btn-sm">Follow</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <h5 class="text-black">Job Update</h5>
-                    <a href="../jobposting/jobposting.html" class="text-decoration-none text-dark">
-                      <div class="job-card shadow-sm p-4 mb-3" style="background-color: #f5f7fa; border-radius: 20px;">
-                        <div class="d-flex justify-content-between">
-                          <small class="job-date text-muted">20 May, 2023</small>
-                          <div class="d-flex gap-2">
-                            <i class="fa-regular fa-bookmark save-icon"></i>
-                            <img src="https://img.icons8.com/ios-filled/50/000000/amazon.png" class="job-logo" alt="Amazon Logo" />
-                          </div>
-                        </div>
-                        <h6 class="fw-bold mt-2" style="color: #000;">Senior UI/UX Designer</h6>
-                        <p class="small text-muted mb-1">Amazon</p>
-                        <div class="d-flex flex-wrap gap-1 mb-2">
-                          <span class="badge bg-light text-dark badge-pill">Part time</span>
-                          <span class="badge bg-light text-dark badge-pill">Senior level</span>
-                          <span class="badge bg-light text-dark badge-pill">Distant</span>
-                          <span class="badge bg-light text-dark badge-pill">Project work</span>
-                        </div>
-                        <p class="fw-semibold small mb-0" style="color: #000;">$250/hr</p>
-                        <p class="text-muted small">San Francisco, CA</p>
-                        <button class="btn btn-dark btn-sm btn-details" data-bs-toggle="modal" data-bs-target="#jobDetailModal">Details</button>
-                      </div>
-                    </a>
-                </div>
+    <div class="container-fluid p-4">
+      <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-8">
+          <!-- Followers Section -->
+          <div class="card p-3 mb-3">
+            <h5>Followers</h5>
+            <div class="d-flex overflow-auto" style="scrollbar-width: none;">
+              <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/benjie.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/conarco.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/kenneth.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/keith.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/kim.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/kyle.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/kyt.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/eugene.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/don.jpg" class="rounded-circle-lg me-2" alt="Profile">
+              <img src="../socmed/img/claidy.jpg" class="rounded-circle-lg me-2" alt="Profile">
             </div>
-        </div>
-    </div>
-    <script>
-        // Notification dropdown toggle
-        document.getElementById('notificationBtn')?.addEventListener('click', function () {
-          document.getElementById('notifDropdown')?.classList.toggle('d-none');
-        });
-    
-        // Mark as read/unread toggle
-        function toggleRead(element) {
-          element.classList.toggle('read');
-          const status = element.querySelector('.notification-status');
-          if (element.classList.contains('read')) {
-            status.textContent = 'Read';
-            status.style.backgroundColor = '#6c757d';
-          } else {
-            status.textContent = 'Unread';
-            status.style.backgroundColor = '#1877f2';
-          }
-        }
-    
-        // Filter notifications
-        function filterNotifications(type, btn) {
-          const buttons = document.querySelectorAll('.notif-tabs button');
-          buttons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-    
-          const items = document.querySelectorAll('.notification-item');
-          items.forEach(item => {
-            if (type === 'all') {
-              item.style.display = 'flex';
-            } else if (type === 'unread') {
-              item.style.display = item.classList.contains('read') ? 'none' : 'flex';
-            }
-          });
-        }
-    
-        // Post new status
-        function postStatus() {
-          const content = document.getElementById('postContent')?.value;
-          if (!content || content.trim() === '') return;
-    
-          const timeline = document.getElementById('timeline');
-          const post = document.createElement('div');
-          post.classList.add('post-box', 'position-relative');
-          post.innerHTML = `
-            <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
-              <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
-            </button>
+          </div>
+          <!-- Post Input Section -->
+          <div class="post-box">
             <div class="d-flex align-items-center">
               <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
-              <div>
-                <p class="mb-0"><strong>You</strong> <span class="text-muted">Student</span></p>
-                <span class="status-badge">Student</span>
+              <input type="text" class="form-control" placeholder="Share something..." id="postContent">
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <button class="btn btn-light btn-sm"><i class="fa-regular fa-file"></i> Files</button>
+              <button class="btn btn-light btn-sm"><i class="fa-regular fa-image"></i> Photos</button>
+              <button class="btn btn-light btn-sm"><i class="fa-solid fa-tag"></i> Tag</button>
+              <button class="btn btn-light btn-sm"><i class="fa-solid fa-link"></i> Links</button>
+              <button class="btn post-btn btn-sm" onclick="postStatus()">Post</button>
+            </div>
+          </div>
+          <!-- Timeline Section -->
+          <div id="timeline" class="mt-4">
+            <div class="post-box position-relative">
+              <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
+                <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
+              </button>
+              
+              <a href="../visitprofile/visitprofile.html" class="text-decoration-none text-dark">
+                <div class="d-flex align-items-center">
+                  <img src="../socmed/img/conarco.jpg" class="rounded-circle-lg me-2" alt="Profile">
+                  <div>
+                    <p class="mb-0 text-black"><strong>John Michael Conarco</strong></p>
+                    <span class="status-badge-senior">Senior</span>
+                  </div>
+                </div>
+              </a>
+              <p class="mt-2">Magbabalik ang nakaraan...<br>Umaasa...</p>
+              <img src="../socmed/img/malupiton.jpg" class="img-fluid rounded mb-3" alt="Seminar Image">
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-light btn-sm like-btn"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
+                <button class="btn btn-light btn-sm comment-btn"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
+                <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
+              </div>
+              
+              <!-- Comment Section -->
+              <div class="comments-section mt-3">
+                <div class="highlight-comment">
+                  <div class="d-flex align-items-center mb-2">
+                    <img src="../socmed/img/claidy.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Commenter">
+                    <div>
+                      <p class="mb-0 small"><strong>Claidy Taguran</strong> Nice photo!</p>
+                    </div>
+                  </div>
+                </div>
+                <a href="#" class="view-comments text-decoration-none small">View all <span class="comment-count">2</span> comments</a>
+                <div class="all-comments d-none mt-2">
+                  <div class="comment-item d-flex align-items-center">
+                    <img src="../socmed/img/claidy.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Claidy">
+                    <div>
+                      <p class="mb-0 small"><strong>Claidy Taguran</strong> Nice photo!</p>
+                    </div>
+                  </div>
+                  <div class="comment-item d-flex align-items-center">
+                    <img src="../socmed/img/kyle.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Kyle">
+                    <div>
+                      <p class="mb-0 small"><strong>Kyle Grapa</strong> Looking good!</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="add-comment mt-2 d-flex align-items-center">
+                  <img src="../socmed/img/jebel.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="You">
+                  <input type="text" class="form-control form-control-sm" placeholder="Write a comment...">
+                  <button class="btn btn-link btn-sm text-primary post-comment">Post</button>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="right col-md-4">
+          <h5 class="text-black">Suggestions</h5>
+          <div class="suggestions-section overflow-auto" style="max-height: 250px; scrollbar-width: none;">
+            <div class="d-flex flex-column">
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/rumil.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Rumil Christian Seloveres <span class="status-badge">Student</span></p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/loraine.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Loraine Daque <span class="status-badge">Student</span><p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/rod.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Rod Capili <span class="status-badge">Student</span></p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/leo.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Leo Egam <span class="status-badge">Student</span></p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
+              </div>
+              <!-- Additional suggestions will scroll -->
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/rumil.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Rumil Christian Seloveres <span class="status-badge">Student</span><p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/loraine.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Loraine Daque <span class="status-badge">Student</span><p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/rod.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Rod Capili <span class="status-badge">Student</span><p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <img src="../socmed/img/leo.jpg" class="rounded-circle-lg me-2" alt="User">
+                <div>
+                  <p class="mb-0 text-black">Leo Egam <span class="status-badge">Student</span></p>
+                  <button class="btn btn-primary btn-sm">Follow</button>
+                </div>
               </div>
             </div>
-            <p class="mt-2">${content}</p>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-light btn-sm"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
-              <button class="btn btn-light btn-sm"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
-              <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
-            </div>`;
-    
-          timeline?.prepend(post);
-          document.getElementById('postContent').value = '';
+          </div>
+          <h5 class="text-black">Job Update</h5>
+          <a href="../jobposting/jobposting.html" class="text-decoration-none text-dark">
+            <div class="job-card shadow-sm p-4 mb-3" style="background-color: #f5f7fa; border-radius: 20px;">
+              <div class="d-flex justify-content-between">
+                <small class="job-date text-muted">20 May, 2023</small>
+                <div class="d-flex gap-2">
+                  <i class="fa-regular fa-bookmark save-icon"></i>
+                  <img src="https://img.icons8.com/ios-filled/50/000000/amazon.png" class="job-logo" alt="Amazon Logo" />
+                </div>
+              </div>
+              <h6 class="fw-bold mt-2" style="color: #000;">Senior UI/UX Designer</h6>
+              <p class="small text-muted mb-1">Amazon</p>
+              <div class="d-flex flex-wrap gap-1 mb-2">
+                <span class="badge bg-light text-dark badge-pill">Part time</span>
+                <span class="badge bg-light text-dark badge-pill">Senior level</span>
+                <span class="badge bg-light text-dark badge-pill">Distant</span>
+                <span class="badge bg-light text-dark badge-pill">Project work</span>
+              </div>
+              <p class="fw-semibold small mb-0" style="color: #000;">$250/hr</p>
+              <p class="text-muted small">San Francisco, CA</p>
+              <button class="btn btn-dark btn-sm btn-details" data-bs-toggle="modal" data-bs-target="#jobDetailModal">Details</button>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Post Detail Modal -->
+   <div class="modal fade" id="postDetailModal" tabindex="-1" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered modal-lg">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title">Post Details</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+             id="modalCloseBtn"></button>
+         </div>
+         <div class="modal-body">
+           <div class="post-detail-container">
+             <!-- Post content will be loaded here dynamically -->
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+  <script>
+    // Notification dropdown toggle
+    document.getElementById('notificationBtn')?.addEventListener('click', function () {
+      document.getElementById('notifDropdown')?.classList.toggle('d-none');
+    });
+
+    // Mark as read/unread toggle
+    function toggleRead(element) {
+      element.classList.toggle('read');
+      const status = element.querySelector('.notification-status');
+      if (element.classList.contains('read')) {
+        status.textContent = 'Read';
+        status.style.backgroundColor = '#6c757d';
+      } else {
+        status.textContent = 'Unread';
+        status.style.backgroundColor = '#1877f2';
+      }
+    }
+
+    // Filter notifications
+    function filterNotifications(type, btn) {
+      const buttons = document.querySelectorAll('.notif-tabs button');
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const items = document.querySelectorAll('.notification-item');
+      items.forEach(item => {
+        if (type === 'all') {
+          item.style.display = 'flex';
+        } else if (type === 'unread') {
+          item.style.display = item.classList.contains('read') ? 'none' : 'flex';
         }
-    
-        // Profile redirect for visit profile
-        document.addEventListener('DOMContentLoaded', function () {
-          const profileImage = document.querySelector('img[src="../socmed/img/conarco.jpg"]');
-          profileImage?.addEventListener('click', function () {
-            window.location.href = '../visitprofile/visitprofile.html';
-          });
+      });
+    }
+
+    // Post new status
+    function postStatus() {
+      const content = document.getElementById('postContent')?.value;
+      if (!content || content.trim() === '') return;
+
+      const timeline = document.getElementById('timeline');
+      const post = document.createElement('div');
+      post.classList.add('post-box', 'position-relative');
+      post.innerHTML = `
+        <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
+          <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
+        </button>
+        <div class="d-flex align-items-center">
+          <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
+          <div>
+            <p class="mb-0"><strong>You</strong> <span class="text-muted">Student</span></p>
+            <span class="status-badge">Student</span>
+          </div>
+        </div>
+        <p class="mt-2">${content}</p>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-light btn-sm like-btn"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
+          <button class="btn btn-light btn-sm comment-btn"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
+          <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
+        </div>
+        <div class="comments-section mt-3">
+          <div class="highlight-comment d-none">
+            <div class="d-flex align-items-center mb-2">
+              <img src="" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Commenter">
+              <div>
+                <p class="mb-0 small"><strong class="comment-author"></strong> <span class="comment-text"></span></p>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="view-comments text-decoration-none small d-none">View all <span class="comment-count">0</span> comments</a>
+          <div class="all-comments d-none mt-2"></div>
+          <div class="add-comment mt-2 d-flex align-items-center">
+            <img src="../socmed/img/jebel.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="You">
+            <input type="text" class="form-control form-control-sm" placeholder="Write a comment...">
+            <button class="btn btn-link btn-sm text-primary post-comment">Post</button>
+          </div>
+        </div>`;
+
+      timeline?.prepend(post);
+      document.getElementById('postContent').value = '';
+    }
+
+     // Function to show post in modal
+    function showPostInModal(postElement) {
+      const modal = new bootstrap.Modal(document.getElementById('postDetailModal'));
+      const modalContainer = document.querySelector('.post-detail-container');
+      
+      // Clear previous modal content
+      modalContainer.innerHTML = '';
+      
+      // Clone the post content
+      const postContent = postElement.cloneNode(true);
+      
+      // Remove the ellipsis button from modal view
+      const ellipsisBtn = postContent.querySelector('.ellipsis-btn');
+      if (ellipsisBtn) ellipsisBtn.remove();
+      
+      // Update the structure for modal view
+      postContent.classList.add('modal-post-content');
+      
+      // Move the comments section to be separate in modal
+      const commentsSection = postContent.querySelector('.comments-section');
+      if (commentsSection) {
+        commentsSection.classList.remove('mt-3');
+        commentsSection.classList.add('modal-comments-section');
+      }
+      
+      // Append the post content to modal
+      modalContainer.appendChild(postContent);
+      
+      // Show all comments in modal by default
+      const allComments = postContent.querySelector('.all-comments');
+      const highlightComment = postContent.querySelector('.highlight-comment');
+      const viewCommentsLink = postContent.querySelector('.view-comments');
+      
+      if (allComments) {
+        allComments.classList.remove('d-none');
+        if (highlightComment) highlightComment.classList.add('d-none');
+        if (viewCommentsLink) viewCommentsLink.textContent = 'Hide comments';
+      }
+      
+      // Add modal-specific comment functionality
+      const modalCommentInput = postContent.querySelector('.add-comment input');
+      const modalCommentBtn = postContent.querySelector('.post-comment');
+      
+      if (modalCommentInput && modalCommentBtn) {
+        modalCommentInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            addComment(postElement, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
+            addComment(postContent, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
+            modalCommentInput.value = '';
+          }
         });
-      </script>
-    <script src="../socmed/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        
+        modalCommentBtn.addEventListener('click', function() {
+          if (modalCommentInput.value.trim()) {
+            addComment(postElement, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
+            addComment(postContent, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
+            modalCommentInput.value = '';
+          }
+        });
+      }
+      
+      // Show the modal
+      modal.show();
+      
+      // Properly handle modal close
+      document.getElementById('modalCloseBtn').addEventListener('click', function() {
+        modal.hide();
+      });
+      
+      // Also handle when modal is closed by clicking outside
+      document.getElementById('postDetailModal').addEventListener('hidden.bs.modal', function () {
+        // Any cleanup if needed
+      });
+    }
+    
+
+    // Comment functionality
+    document.addEventListener('click', function(e) {
+      // Handle "View all comments" click
+      if (e.target.classList.contains('view-comments')) {
+        e.preventDefault();
+        const post = e.target.closest('.post-box');
+        const allComments = post.querySelector('.all-comments');
+        const highlightComment = post.querySelector('.highlight-comment');
+        
+        allComments.classList.toggle('d-none');
+        highlightComment.classList.add('d-none');
+        
+        // Change text based on state
+        if (!allComments.classList.contains('d-none')) {
+          e.target.textContent = 'Hide comments';
+        } else {
+          e.target.textContent = `View all ${post.querySelector('.comment-count').textContent} comments`;
+        }
+      }
+      
+      // Handle posting a new comment
+      if (e.target.classList.contains('post-comment')) {
+        const input = e.target.previousElementSibling;
+        const commentText = input.value.trim();
+        
+        if (commentText) {
+          const post = e.target.closest('.post-box');
+          addComment(post, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
+          input.value = '';
+        }
+      }
+      
+      // Handle comment button click to show modal
+      if (e.target.classList.contains('comment-btn') || e.target.closest('.comment-btn')) {
+        const postElement = e.target.closest('.post-box');
+        showPostInModal(postElement);
+      }
+    });
+
+    // Function to add a comment to a post
+    function addComment(post, author, text, image) {
+      const commentsSection = post.querySelector('.comments-section');
+      if (!commentsSection) return;
+      
+      const highlightComment = commentsSection.querySelector('.highlight-comment');
+      const allComments = commentsSection.querySelector('.all-comments');
+      const viewCommentsLink = commentsSection.querySelector('.view-comments');
+      const commentCount = commentsSection.querySelector('.comment-count');
+      
+      // Create comment element
+      const commentElement = document.createElement('div');
+      commentElement.className = 'comment-item d-flex align-items-center';
+      commentElement.innerHTML = `
+        <img src="${image}" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="${author}">
+        <div>
+          <p class="mb-0 small"><strong>${author}</strong> ${text}</p>
+        </div>
+      `;
+      
+      // Add to all comments container
+      if (allComments) {
+        allComments.appendChild(commentElement);
+      }
+      
+      // Update comment count
+      if (commentCount) {
+        const currentCount = parseInt(commentCount.textContent) || 0;
+        const newCount = currentCount + 1;
+        commentCount.textContent = newCount;
+      }
+      
+      // Update highlight comment (show most recent)
+      if (highlightComment) {
+        const commentAuthor = highlightComment.querySelector('.comment-author');
+        const commentText = highlightComment.querySelector('.comment-text');
+        const commentImg = highlightComment.querySelector('img');
+        
+        if (commentAuthor) commentAuthor.textContent = author;
+        if (commentText) commentText.textContent = text;
+        if (commentImg) commentImg.src = image;
+        
+        highlightComment.classList.remove('d-none');
+      }
+      
+      // Show elements if this is the first comment
+      if (viewCommentsLink && viewCommentsLink.classList.contains('d-none') && commentCount && parseInt(commentCount.textContent) === 1) {
+        viewCommentsLink.classList.remove('d-none');
+        if (allComments) allComments.classList.add('d-none');
+      }
+      
+      // Update view comments text
+      if (viewCommentsLink && commentCount) {
+        viewCommentsLink.textContent = `View all ${commentCount.textContent} comments`;
+      }
+    }
+
+    // Initialize sample comments for existing posts
+    document.addEventListener('DOMContentLoaded', function() {
+      // For the existing post in your HTML
+      const firstPost = document.querySelector('.post-box');
+      if (firstPost) {
+        addComment(firstPost, 'Claidy Taguran', 'Nice photo!', '../socmed/img/claidy.jpg');
+        addComment(firstPost, 'Kyle Grapa', 'Looking good!', '../socmed/img/kyle.jpg');
+      }
+      
+      // For dynamically added posts
+      document.getElementById('postContent')?.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          postStatus();
+        }
+      });
+      
+      // Add click handler to all comment buttons
+      document.querySelectorAll('.comment-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const postElement = btn.closest('.post-box');
+          showPostInModal(postElement);
+        });
+      });
+    });
+  </script>
+  <script src="../socmed/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
