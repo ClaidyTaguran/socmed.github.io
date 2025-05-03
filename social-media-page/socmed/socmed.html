@@ -9,6 +9,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../socmed/style.css">
   <style>
+    .post-btn {
+    background-color: #1877f2;
+    color: white;
+    }
+
     /* Notification styles */
     .notification-dropdown {
       max-height: 400px;
@@ -63,79 +68,275 @@
       border-bottom: 2px solid #1877f2;
     }
     
-    /* Comments section styles */
+    /* Enhanced Comment Section Styles */
     .comments-section {
-      border-top: 1px solid #e4e6eb;
-      padding-top: 12px;
+    border-top: 1px solid #e4e6eb;
+    padding: 12px 0;
+    margin-top: 12px;
     }
-    .highlight-comment {
-      background-color: #f0f2f5;
-      padding: 8px;
-      border-radius: 8px;
-    }
-    .all-comments {
-      max-height: 300px;
-      overflow-y: auto;
-    }
+
     .comment-item {
-      padding: 8px;
-      border-radius: 8px;
-      margin-bottom: 4px;
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    position: relative;
     }
-    .comment-item:hover {
-      background-color: #f0f2f5;
+
+    .comment-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
     }
+
+    .comment-content {
+    flex-grow: 1;
+    }
+
+    .comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    }
+
+    .comment-author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #050505;
+    margin-right: 6px;
+    }
+
+    .comment-time {
+    font-size: 0.75rem;
+    color: #65676b;
+    }
+
+    .comment-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #050505;
+    margin-bottom: 6px;
+    }
+
+    .comment-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+    }
+
+    .comment-action {
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    color: #65676b;
+    cursor: pointer;
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    }
+
+    .comment-action:hover {
+    text-decoration: underline;
+    }
+
+    .comment-action i {
+    margin-right: 4px;
+    font-size: 0.9rem;
+    }
+
+    .comment-action.liked {
+    color: #1877f2;
+    }
+
+    /* Reply Section */
+    .replies-container {
+    margin-left: 46px;
+    padding-left: 12px;
+    border-left: 2px solid #e4e6eb;
+    }
+
+    .reply-form {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    }
+
+    .reply-input {
+    flex-grow: 1;
+    background: #f0f2f5;
+    border: none;
+    border-radius: 18px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    }
+
+    .reply-input:focus {
+    outline: none;
+    background: #e4e6eb;
+    }
+
+    .reply-button {
+    background: none;
+    border: none;
+    color: #1877f2;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+
+    /* Highlight Comment */
+    .highlight-comment {
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+    }
+
+    /* View Comments Link */
     .view-comments {
-      color: #65676b;
-      display: inline-block;
-      margin-bottom: 8px;
+    display: inline-block;
+    color: #65676b;
+    font-size: 0.85rem;
+    margin: 8px 0;
+    text-decoration: none;
     }
+
     .view-comments:hover {
-      text-decoration: underline;
+    text-decoration: underline;
     }
-    .add-comment input {
-      background-color: #f0f2f5;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 12px;
+
+    /* Add Comment Section */
+    .add-comment {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 12px;
     }
-    .add-comment input:focus {
-      background-color: #e4e6eb;
-      box-shadow: none;
+
+    .comment-input {
+    flex-grow: 1;
+    background: #f0f2f5;
+    border: none;
+    border-radius: 18px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
     }
-    
-    /* Modal Post Styles */
-    .post-detail-container {
-      max-height: 80vh;
-      overflow-y: auto;
+
+    .comment-input:focus {
+    outline: none;
+    background: #e4e6eb;
     }
-    .modal-post-content {
-      border-bottom: 1px solid #e4e6eb;
-      padding-bottom: 15px;
-      margin-bottom: 15px;
+
+    .post-comment {
+    background: none;
+    border: none;
+    color: #1877f2;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
     }
-    .modal-comments-section {
-      padding: 15px 0;
+
+    /* Modern Modal Styles */
+    .modal-content {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
-    .modal-comment-item {
-      padding: 8px 0;
-      border-bottom: 1px solid #f0f2f5;
+
+    .modal-header {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
     }
-    .modal-comment-item:last-child {
-      border-bottom: none;
+
+    .comment-item .bg-white {
+    transition: all 0.2s ease;
     }
-    .modal-add-comment {
-      position: sticky;
-      bottom: 0;
-      background: white;
-      padding: 15px 0;
-      border-top: 1px solid #e4e6eb;
+
+    .comment-item .bg-white:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
-    .modal-post-img {
-      max-height: 500px;
-      object-fit: contain;
-      background: #f0f2f5;
+
+    .btn-sm.p-0 {
+    padding: 0.25rem 0.5rem;
     }
+
+    /* Smooth scrolling for comments */
+    .modal-dialog-scrollable .modal-body {
+    scrollbar-width: thin;
+    scrollbar-color: #adb5bd #f8f9fa;
+    }
+
+    /* Modern input styling */
+    .form-control.rounded-pill {
+    border: 1px solid #dee2e6;
+    padding-right: 40px;
+    }
+
+    .form-control.rounded-pill:focus {
+    box-shadow: none;
+    border-color: #86b7fe;
+    }
+
+    /* Like button animation */
+    .fa-heart {
+    transition: all 0.2s ease;
+    }
+
+    .fa-heart:hover {
+    transform: scale(1.1);
+    color: #dc3545 !important;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+    .notification-dropdown {
+    width: 280px;
+    right: -50px !important;
+    }
+
+    .modal-dialog {
+    margin: 0.5rem;
+    }
+
+    .replies-container {
+    margin-left: 30px;
+    }
+
+    .comment-avatar {
+    width: 32px;
+    height: 32px;
+    }
+    }
+
+    @media (max-width: 576px) {
+    .post-box {
+    padding: 12px;
+    }
+
+    .comment-actions {
+    gap: 8px;
+    }
+
+    .replies-container {
+    margin-left: 20px;
+    padding-left: 8px;
+    }
+    }
+
+    /* Animation for likes */
+    @keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+    }
+
+    .heart-beat {
+    animation: heartBeat 1s;
+    }
+
   </style>
 </head>
 <body>
@@ -251,40 +452,103 @@
                 <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
               </div>
               
-              <!-- Comment Section -->
-              <div class="comments-section mt-3">
-                <div class="highlight-comment">
-                  <div class="d-flex align-items-center mb-2">
-                    <img src="../socmed/img/claidy.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Commenter">
-                    <div>
-                      <p class="mb-0 small"><strong>Claidy Taguran</strong> Nice photo!</p>
-                    </div>
-                  </div>
-                </div>
-                <a href="#" class="view-comments text-decoration-none small">View all <span class="comment-count">2</span> comments</a>
-                <div class="all-comments d-none mt-2">
-                  <div class="comment-item d-flex align-items-center">
-                    <img src="../socmed/img/claidy.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Claidy">
-                    <div>
-                      <p class="mb-0 small"><strong>Claidy Taguran</strong> Nice photo!</p>
-                    </div>
-                  </div>
-                  <div class="comment-item d-flex align-items-center">
-                    <img src="../socmed/img/kyle.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Kyle">
-                    <div>
-                      <p class="mb-0 small"><strong>Kyle Grapa</strong> Looking good!</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="add-comment mt-2 d-flex align-items-center">
-                  <img src="../socmed/img/jebel.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="You">
-                  <input type="text" class="form-control form-control-sm" placeholder="Write a comment...">
-                  <button class="btn btn-link btn-sm text-primary post-comment">Post</button>
-                </div>
-              </div>
-            </div> 
-          </div>
-        </div>
+               <!-- Enhanced Comment Section -->
+               <div class="comments-section mt-3">
+                 <div class="highlight-comment">
+                   <div class="comment-item">
+                     <img src="../socmed/img/claidy.jpg" class="comment-avatar" alt="Claidy">
+                     <div class="comment-content">
+                       <div class="comment-header">
+                         <span class="comment-author">Claidy Taguran</span>
+                         <span class="comment-time">10 mins ago</span>
+                       </div>
+                       <p class="comment-text">Nice photo! The colors are amazing.</p>
+                       <div class="comment-actions">
+                         <button class="comment-action like-comment">
+                           <i class="fa-regular fa-heart"></i> Like
+                         </button>
+                         <button class="comment-action reply-btn">
+                           <i class="fa-regular fa-comment"></i> Reply
+                         </button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+                 <a href="#" class="view-comments">View all 2 comments</a>
+
+                 <div class="all-comments" style="display: none;">
+                   <div class="comment-item">
+                     <img src="../socmed/img/claidy.jpg" class="comment-avatar" alt="Claidy">
+                     <div class="comment-content">
+                       <div class="comment-header">
+                         <span class="comment-author">Claidy Taguran</span>
+                         <span class="comment-time">10 mins ago</span>
+                       </div>
+                       <p class="comment-text">Nice photo! The colors are amazing.</p>
+                       <div class="comment-actions">
+                         <button class="comment-action like-comment">
+                           <i class="fa-regular fa-heart"></i> Like
+                         </button>
+                         <button class="comment-action reply-btn">
+                           <i class="fa-regular fa-comment"></i> Reply
+                         </button>
+                       </div>
+
+                       <!-- Reply example -->
+                       <div class="replies-container">
+                         <div class="comment-item">
+                           <img src="../socmed/img/jebel.jpg" class="comment-avatar" alt="You">
+                           <div class="comment-content">
+                             <div class="comment-header">
+                               <span class="comment-author">You</span>
+                               <span class="comment-time">5 mins ago</span>
+                             </div>
+                             <p class="comment-text">Thanks! I took it last weekend.</p>
+                             <div class="comment-actions">
+                               <button class="comment-action like-comment">
+                                 <i class="fa-regular fa-heart"></i> Like
+                               </button>
+                               <button class="comment-action reply-btn">
+                                 <i class="fa-regular fa-comment"></i> Reply
+                               </button>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+
+                   <div class="comment-item">
+                     <img src="../socmed/img/kyle.jpg" class="comment-avatar" alt="Kyle">
+                     <div class="comment-content">
+                       <div class="comment-header">
+                         <span class="comment-author">Kyle Grapa</span>
+                         <span class="comment-time">30 mins ago</span>
+                       </div>
+                       <p class="comment-text">Looking good! Where was this taken?</p>
+                       <div class="comment-actions">
+                         <button class="comment-action like-comment">
+                           <i class="fa-regular fa-heart"></i> Like
+                         </button>
+                         <button class="comment-action reply-btn">
+                           <i class="fa-regular fa-comment"></i> Reply
+                         </button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="add-comment">
+                   <img src="../socmed/img/jebel.jpg" class="comment-avatar" alt="You">
+                   <input type="text" class="comment-input" placeholder="Write a comment...">
+                   <button class="post-comment">Post</button>
+                 </div>
+               </div>
+               </div>
+               </div>
+               </div>
+
         <!-- Right Column -->
         <div class="right col-md-4">
           <h5 class="text-black">Suggestions</h5>
@@ -377,303 +641,771 @@
     </div>
   </div>
 
-   <!-- Post Detail Modal -->
-   <div class="modal fade" id="postDetailModal" tabindex="-1" aria-hidden="true">
-     <div class="modal-dialog modal-dialog-centered modal-lg">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h5 class="modal-title">Post Details</h5>
-           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-             id="modalCloseBtn"></button>
-         </div>
-         <div class="modal-body">
-           <div class="post-detail-container">
-             <!-- Post content will be loaded here dynamically -->
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
+  <!-- Modern Post Detail Modal -->
+  <div class="modal fade" id="postDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4">
+        <!-- Modal Header -->
+        <div class="modal-header border-0 position-relative">
+          <div class="w-100 text-center">
+            <h5 class="modal-title fw-bold">Post Details</h5>
+          </div>
+          <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body p-0">
+          <!-- Post Content -->
+          <div class="post-box p-3">
+            <div class="d-flex align-items-center mb-3">
+              <img src="../socmed/img/conarco.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+              <div>
+                <p class="mb-0 fw-bold">John Michael Conarco</p>
+                <small class="text-muted">Senior</small>
+              </div>
+            </div>
+            <p class="mb-3">Magbabalik ang nakaraan...<br>Umaasa...</p>
+            <img src="../socmed/img/malupiton.jpg" class="img-fluid rounded mb-3 modal-post-image" alt="Post Image">
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between border-top border-bottom py-2 mb-3">
+              <button class="btn btn-sm p-0 text-dark">
+                <i class="far fa-heart fa-lg me-1"></i> Like
+              </button>
+              <button class="btn btn-sm p-0 text-dark">
+                <i class="far fa-comment fa-lg me-1"></i> Comment
+              </button>
+              <button class="btn btn-sm p-0 text-dark">
+                <i class="fas fa-share fa-lg me-1"></i> Share
+              </button>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+              <div class="highlight-comment mb-3">
+                <div class="comment-item">
+                  <img src="../socmed/img/claidy.jpg" class="comment-avatar" alt="Claidy">
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author">Claidy Taguran</span>
+                      <span class="comment-time">10 mins ago</span>
+                    </div>
+                    <p class="comment-text">Nice photo! The colors are amazing.</p>
+                    <div class="comment-actions">
+                      <button class="comment-action like-comment">
+                        <i class="fa-regular fa-heart"></i> Like
+                      </button>
+                      <button class="comment-action">
+                        <i class="fa-regular fa-comment"></i> Reply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <a href="#" class="view-comments">View all 2 comments</a>
+
+              <div class="all-comments" style="display: none;">
+                <div class="comment-item mb-3">
+                  <img src="../socmed/img/claidy.jpg" class="comment-avatar" alt="Claidy">
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author">Claidy Taguran</span>
+                      <span class="comment-time">10 mins ago</span>
+                    </div>
+                    <p class="comment-text">Nice photo! The colors are amazing.</p>
+                    <div class="comment-actions">
+                      <button class="comment-action like-comment">
+                        <i class="fa-regular fa-heart"></i> Like
+                      </button>
+                      <button class="comment-action">
+                        <i class="fa-regular fa-comment"></i> Reply
+                      </button>
+                    </div>
+
+                    <!-- Reply example (visible but non-functional) -->
+                    <div class="replies-container">
+                      <div class="comment-item">
+                        <img src="../socmed/img/jebel.jpg" class="comment-avatar" alt="You">
+                        <div class="comment-content">
+                          <div class="comment-header">
+                            <span class="comment-author">You</span>
+                            <span class="comment-time">5 mins ago</span>
+                          </div>
+                          <p class="comment-text">Thanks! I took it last weekend.</p>
+                          <div class="comment-actions">
+                            <button class="comment-action like-comment">
+                              <i class="fa-regular fa-heart"></i> Like
+                            </button>
+                            <button class="comment-action">
+                              <i class="fa-regular fa-comment"></i> Reply
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="comment-item">
+                  <img src="../socmed/img/kyle.jpg" class="comment-avatar" alt="Kyle">
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author">Kyle Grapa</span>
+                      <span class="comment-time">30 mins ago</span>
+                    </div>
+                    <p class="comment-text">Looking good! Where was this taken?</p>
+                    <div class="comment-actions">
+                      <button class="comment-action like-comment">
+                        <i class="fa-regular fa-heart"></i> Like
+                      </button>
+                      <button class="comment-action">
+                        <i class="fa-regular fa-comment"></i> Reply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add Comment -->
+              <div class="add-comment mt-3">
+                <img src="../socmed/img/jebel.jpg" class="comment-avatar" alt="You">
+                <input type="text" class="comment-input" placeholder="Write a comment...">
+                <button class="post-comment">Post</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Bootstrap modal
+    const postModal = new bootstrap.Modal(document.getElementById('postDetailModal'));
+
     // Notification dropdown toggle
-    document.getElementById('notificationBtn')?.addEventListener('click', function () {
-      document.getElementById('notifDropdown')?.classList.toggle('d-none');
+    document.getElementById('notificationBtn')?.addEventListener('click', function() {
+    document.getElementById('notifDropdown')?.classList.toggle('d-none');
     });
 
     // Mark as read/unread toggle
     function toggleRead(element) {
-      element.classList.toggle('read');
-      const status = element.querySelector('.notification-status');
-      if (element.classList.contains('read')) {
-        status.textContent = 'Read';
-        status.style.backgroundColor = '#6c757d';
-      } else {
-        status.textContent = 'Unread';
-        status.style.backgroundColor = '#1877f2';
-      }
+    element.classList.toggle('read');
+    const status = element.querySelector('.notification-status');
+    if (element.classList.contains('read')) {
+    status.textContent = 'Read';
+    status.style.backgroundColor = '#6c757d';
+    } else {
+    status.textContent = 'Unread';
+    status.style.backgroundColor = '#1877f2';
+    }
     }
 
     // Filter notifications
     function filterNotifications(type, btn) {
-      const buttons = document.querySelectorAll('.notif-tabs button');
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    const buttons = document.querySelectorAll('.notif-tabs button');
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-      const items = document.querySelectorAll('.notification-item');
-      items.forEach(item => {
-        if (type === 'all') {
-          item.style.display = 'flex';
-        } else if (type === 'unread') {
-          item.style.display = item.classList.contains('read') ? 'none' : 'flex';
-        }
-      });
+    const items = document.querySelectorAll('.notification-item');
+    items.forEach(item => {
+    if (type === 'all') {
+    item.style.display = 'flex';
+    } else if (type === 'unread') {
+    item.style.display = item.classList.contains('read') ? 'none' : 'flex';
+    }
+    });
     }
 
     // Post new status
     function postStatus() {
-      const content = document.getElementById('postContent')?.value;
-      if (!content || content.trim() === '') return;
+    const content = document.getElementById('postContent')?.value;
+    if (!content || content.trim() === '') return;
 
-      const timeline = document.getElementById('timeline');
-      const post = document.createElement('div');
-      post.classList.add('post-box', 'position-relative');
-      post.innerHTML = `
-        <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
-          <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
-        </button>
-        <div class="d-flex align-items-center">
-          <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
-          <div>
-            <p class="mb-0"><strong>You</strong> <span class="text-muted">Student</span></p>
-            <span class="status-badge">Student</span>
-          </div>
-        </div>
-        <p class="mt-2">${content}</p>
-        <div class="d-flex justify-content-between">
-          <button class="btn btn-light btn-sm like-btn"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
-          <button class="btn btn-light btn-sm comment-btn"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
-          <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
-        </div>
-        <div class="comments-section mt-3">
-          <div class="highlight-comment d-none">
-            <div class="d-flex align-items-center mb-2">
-              <img src="" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Commenter">
-              <div>
-                <p class="mb-0 small"><strong class="comment-author"></strong> <span class="comment-text"></span></p>
-              </div>
+    const timeline = document.getElementById('timeline');
+    const post = document.createElement('div');
+    post.classList.add('post-box', 'position-relative');
+    post.innerHTML = `
+    <button class="btn ellipsis-btn btn-light btn-sm position-absolute" style="top: 10px; right: 10px;">
+      <i class="fa-solid fa-ellipsis-vertical fa-beat"></i>
+    </button>
+    <div class="d-flex align-items-center">
+      <img src="../socmed/img/jebel.jpg" class="rounded-circle-lg me-2" alt="Profile">
+      <div>
+        <p class="mb-0"><strong>You</strong> <span class="text-muted">Student</span></p>
+        <span class="status-badge">Student</span>
+      </div>
+    </div>
+    <p class="mt-2">${content}</p>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-light btn-sm like-btn"><i class="fa-regular fa-heart fa-beat"></i> Like</button>
+      <button class="btn btn-light btn-sm comment-btn"><i class="fa-regular fa-comment fa-beat"></i> Comment</button>
+      <button class="btn btn-light btn-sm"><i class="fa-solid fa-share fa-beat"></i> Share</button>
+    </div>
+    <div class="comments-section mt-3">
+      <div class="highlight-comment d-none">
+        <div class="comment-item">
+          <img src="" class="comment-avatar" alt="Commenter">
+          <div class="comment-content">
+            <div class="comment-header">
+              <span class="comment-author"></span>
+              <span class="comment-time"></span>
             </div>
+            <p class="comment-text"></p>
           </div>
-          <a href="#" class="view-comments text-decoration-none small d-none">View all <span class="comment-count">0</span> comments</a>
-          <div class="all-comments d-none mt-2"></div>
-          <div class="add-comment mt-2 d-flex align-items-center">
-            <img src="../socmed/img/jebel.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="You">
-            <input type="text" class="form-control form-control-sm" placeholder="Write a comment...">
-            <button class="btn btn-link btn-sm text-primary post-comment">Post</button>
-          </div>
-        </div>`;
+        </div>
+      </div>
+      <a href="#" class="view-comments text-decoration-none small d-none">View all <span class="comment-count">0</span>
+        comments</a>
+      <div class="all-comments d-none mt-2"></div>
+      <div class="add-comment mt-2 d-flex align-items-center">
+        <img src="../socmed/img/jebel.jpg" class="rounded-circle me-2"
+          style="width: 32px; height: 32px; object-fit: cover;" alt="You">
+        <input type="text" class="form-control form-control-sm" placeholder="Write a comment...">
+        <button class="btn btn-link btn-sm text-primary post-comment">Post</button>
+      </div>
+    </div>`;
 
-      timeline?.prepend(post);
-      document.getElementById('postContent').value = '';
+    timeline?.prepend(post);
+    document.getElementById('postContent').value = '';
+    setupPostInteractions(post);
     }
 
-     // Function to show post in modal
-    function showPostInModal(postElement) {
-      const modal = new bootstrap.Modal(document.getElementById('postDetailModal'));
-      const modalContainer = document.querySelector('.post-detail-container');
-      
-      // Clear previous modal content
-      modalContainer.innerHTML = '';
-      
-      // Clone the post content
-      const postContent = postElement.cloneNode(true);
-      
-      // Remove the ellipsis button from modal view
-      const ellipsisBtn = postContent.querySelector('.ellipsis-btn');
-      if (ellipsisBtn) ellipsisBtn.remove();
-      
-      // Update the structure for modal view
-      postContent.classList.add('modal-post-content');
-      
-      // Move the comments section to be separate in modal
-      const commentsSection = postContent.querySelector('.comments-section');
-      if (commentsSection) {
-        commentsSection.classList.remove('mt-3');
-        commentsSection.classList.add('modal-comments-section');
-      }
-      
-      // Append the post content to modal
-      modalContainer.appendChild(postContent);
-      
-      // Show all comments in modal by default
-      const allComments = postContent.querySelector('.all-comments');
-      const highlightComment = postContent.querySelector('.highlight-comment');
-      const viewCommentsLink = postContent.querySelector('.view-comments');
-      
-      if (allComments) {
-        allComments.classList.remove('d-none');
-        if (highlightComment) highlightComment.classList.add('d-none');
-        if (viewCommentsLink) viewCommentsLink.textContent = 'Hide comments';
-      }
-      
-      // Add modal-specific comment functionality
-      const modalCommentInput = postContent.querySelector('.add-comment input');
-      const modalCommentBtn = postContent.querySelector('.post-comment');
-      
-      if (modalCommentInput && modalCommentBtn) {
-        modalCommentInput.addEventListener('keypress', function(e) {
-          if (e.key === 'Enter') {
-            addComment(postElement, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
-            addComment(postContent, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
-            modalCommentInput.value = '';
-          }
-        });
-        
-        modalCommentBtn.addEventListener('click', function() {
-          if (modalCommentInput.value.trim()) {
-            addComment(postElement, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
-            addComment(postContent, 'Jeriebel Bulac Calunsag', modalCommentInput.value.trim(), '../socmed/img/jebel.jpg');
-            modalCommentInput.value = '';
-          }
-        });
-      }
-      
-      // Show the modal
-      modal.show();
-      
-      // Properly handle modal close
-      document.getElementById('modalCloseBtn').addEventListener('click', function() {
-        modal.hide();
-      });
-      
-      // Also handle when modal is closed by clicking outside
-      document.getElementById('postDetailModal').addEventListener('hidden.bs.modal', function () {
-        // Any cleanup if needed
-      });
-    }
-    
-
-    // Comment functionality
-    document.addEventListener('click', function(e) {
-      // Handle "View all comments" click
-      if (e.target.classList.contains('view-comments')) {
-        e.preventDefault();
-        const post = e.target.closest('.post-box');
-        const allComments = post.querySelector('.all-comments');
-        const highlightComment = post.querySelector('.highlight-comment');
-        
-        allComments.classList.toggle('d-none');
-        highlightComment.classList.add('d-none');
-        
-        // Change text based on state
-        if (!allComments.classList.contains('d-none')) {
-          e.target.textContent = 'Hide comments';
-        } else {
-          e.target.textContent = `View all ${post.querySelector('.comment-count').textContent} comments`;
-        }
-      }
-      
-      // Handle posting a new comment
-      if (e.target.classList.contains('post-comment')) {
-        const input = e.target.previousElementSibling;
-        const commentText = input.value.trim();
-        
-        if (commentText) {
-          const post = e.target.closest('.post-box');
-          addComment(post, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
-          input.value = '';
-        }
-      }
-      
-      // Handle comment button click to show modal
-      if (e.target.classList.contains('comment-btn') || e.target.closest('.comment-btn')) {
-        const postElement = e.target.closest('.post-box');
-        showPostInModal(postElement);
-      }
+    // Setup interactions for a post
+    function setupPostInteractions(post) {
+    // Like button
+    const likeBtn = post.querySelector('.like-btn');
+    if (likeBtn) {
+    likeBtn.addEventListener('click', function() {
+    const icon = likeBtn.querySelector('i');
+    icon.classList.toggle('fa-regular');
+    icon.classList.toggle('fa-solid');
+    icon.classList.toggle('heart-beat');
     });
+    }
+
+    // Comment button - show modal
+    const commentBtn = post.querySelector('.comment-btn');
+    if (commentBtn) {
+    commentBtn.addEventListener('click', function() {
+    showPostInModal(post);
+    });
+    }
+
+    // Post comment button
+    const postCommentBtn = post.querySelector('.post-comment');
+    if (postCommentBtn) {
+    postCommentBtn.addEventListener('click', function() {
+    const input = postCommentBtn.previousElementSibling;
+    const commentText = input.value.trim();
+
+    if (commentText) {
+    addComment(post, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
+    input.value = '';
+    }
+    });
+    }
+
+    // Comment input enter key
+    const commentInput = post.querySelector('.add-comment input[type="text"]');
+    if (commentInput) {
+    commentInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+    const commentText = e.target.value.trim();
+    if (commentText) {
+    addComment(post, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
+    e.target.value = '';
+    }
+    }
+    });
+    }
+
+    // Comment button - show modal
+    document.querySelectorAll('.comment-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+    postModal.show();
+    });
+    });
+
+    // View comments link toggle
+    document.querySelectorAll('.view-comments').forEach(link => {
+    link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const allComments = this.nextElementSibling;
+    const highlightComment = this.previousElementSibling;
+
+    if (allComments.style.display === 'none') {
+    allComments.style.display = 'block';
+    highlightComment.style.display = 'none';
+    this.textContent = 'Hide comments';
+    } else {
+    allComments.style.display = 'none';
+    highlightComment.style.display = 'block';
+    const count = allComments.querySelectorAll('.comment-item').length;
+    this.textContent = `View all ${count} comments`;
+    }
+    });
+    });
+    // Like buttons functionality
+    document.querySelectorAll('.like-comment').forEach(btn => {
+    btn.addEventListener('click', function() {
+    const icon = this.querySelector('i');
+    icon.classList.toggle('fa-regular');
+    icon.classList.toggle('fa-solid');
+    icon.classList.toggle('heart-beat');
+    });
+    });
+
+    // Post comment functionality
+    document.querySelectorAll('.post-comment').forEach(btn => {
+    btn.addEventListener('click', function() {
+    const input = this.previousElementSibling;
+    if (input.value.trim() !== '') {
+    alert('Comment posted: ' + input.value);
+    input.value = '';
+    }
+    });
+    });
+
+
+    // Initialize existing comments
+    post.querySelectorAll('.comment-item').forEach(comment => {
+    setupCommentInteractions(comment);
+    });
+    }
+
+    // Function to show post in modal
+    function showPostInModal(postElement) {
+    const modalContainer = document.querySelector('.post-detail-container');
+    modalContainer.innerHTML = '';
+
+    // Clone the post content
+    const postContent = postElement.cloneNode(true);
+
+    // Remove the ellipsis button from modal view
+    const ellipsisBtn = postContent.querySelector('.ellipsis-btn');
+    if (ellipsisBtn) ellipsisBtn.remove();
+
+    // Update the structure for modal view
+    postContent.classList.add('modal-post-content');
+
+    // Move the comments section to be separate in modal
+    const commentsSection = postContent.querySelector('.comments-section');
+    if (commentsSection) {
+    commentsSection.classList.remove('mt-3');
+    commentsSection.classList.add('modal-comments-section');
+
+    // Show all comments in modal by default
+    const allComments = commentsSection.querySelector('.all-comments');
+    const highlightComment = commentsSection.querySelector('.highlight-comment');
+    const viewCommentsLink = commentsSection.querySelector('.view-comments');
+
+    if (allComments) {
+    allComments.classList.remove('d-none');
+    if (highlightComment) highlightComment.classList.add('d-none');
+    if (viewCommentsLink) viewCommentsLink.textContent = 'Hide comments';
+    }
+    }
+
+    // Append the post content to modal
+    modalContainer.appendChild(postContent);
+
+    // Setup modal interactions with reference to original post
+    setupModalInteractions(postContent, postElement);
+
+    // Show the modal
+    postModal.show();
+    }
+
+    // Setup interactions for modal content
+    function setupModalInteractions(modalContent, originalPost) {
+    // Like button in modal
+    const likeBtn = modalContent.querySelector('.like-btn');
+    if (likeBtn) {
+    likeBtn.addEventListener('click', function() {
+    const icon = likeBtn.querySelector('i');
+    icon.classList.toggle('fa-regular');
+    icon.classList.toggle('fa-solid');
+    icon.classList.toggle('heart-beat');
+
+    // Also update the original post's like button
+    const originalLikeBtn = originalPost.querySelector('.like-btn');
+    if (originalLikeBtn) {
+    const originalIcon = originalLikeBtn.querySelector('i');
+    originalIcon.classList.toggle('fa-regular');
+    originalIcon.classList.toggle('fa-solid');
+    }
+    });
+    }
+
+    // Comment like buttons in modal
+    modalContent.querySelectorAll('.like-comment').forEach(btn => {
+    btn.addEventListener('click', function() {
+    const icon = btn.querySelector('i');
+    icon.classList.toggle('fa-regular');
+    icon.classList.toggle('fa-solid');
+    icon.classList.toggle('heart-beat');
+    btn.classList.toggle('liked');
+
+    // Find the corresponding comment in the original post and update it
+    const commentText = btn.closest('.comment-content').querySelector('.comment-text').textContent;
+    const originalComment = findCommentByText(originalPost, commentText);
+    if (originalComment) {
+    const originalBtn = originalComment.querySelector('.like-comment');
+    if (originalBtn) {
+    const originalIcon = originalBtn.querySelector('i');
+    originalIcon.classList.toggle('fa-regular');
+    originalIcon.classList.toggle('fa-solid');
+    originalBtn.classList.toggle('liked');
+    }
+    }
+    });
+    });
+
+    // Reply buttons in modal
+    modalContent.querySelectorAll('.reply-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+    const commentItem = btn.closest('.comment-item');
+    const commentText = commentItem.querySelector('.comment-text').textContent;
+    const originalComment = findCommentByText(originalPost, commentText);
+
+    showReplyForm(commentItem, modalContent, originalComment || originalPost);
+    });
+    });
+
+    // Post comment in modal
+    const modalPostComment = modalContent.querySelector('.post-comment');
+    if (modalPostComment) {
+    modalPostComment.addEventListener('click', function() {
+    const input = modalPostComment.previousElementSibling;
+    const commentText = input.value.trim();
+
+    if (commentText) {
+    // Add to both modal and original post
+    addComment(modalContent, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
+    addComment(originalPost, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
+    input.value = '';
+
+    // Scroll to bottom in modal
+    const commentsSection = modalContent.querySelector('.modal-comments-section');
+    if (commentsSection) {
+    commentsSection.scrollTop = commentsSection.scrollHeight;
+    }
+    }
+    });
+    }
+
+    // Comment input enter key in modal
+    const modalCommentInput = modalContent.querySelector('.comment-input');
+    if (modalCommentInput) {
+    modalCommentInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+    const commentText = e.target.value.trim();
+    if (commentText) {
+    addComment(modalContent, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
+    addComment(originalPost, 'Jeriebel Bulac Calunsag', commentText, '../socmed/img/jebel.jpg');
+    e.target.value = '';
+
+
+
+    // Scroll to bottom of comments
+    const commentsSection = modalContent.querySelector('.modal-comments-section');
+    if (commentsSection) {
+    commentsSection.scrollTop = commentsSection.scrollHeight;
+    }
+    }
+    }
+    });
+    }
+
+    // Initialize existing comments in modal
+    modalContent.querySelectorAll('.comment-item').forEach(comment => {
+    setupCommentInteractions(comment);
+    });
+    }
+
+    // Helper function to show reply form
+    function showReplyForm(commentItem, modalContent, originalPost) {
+    const repliesContainer = commentItem.querySelector('.replies-container');
+    if (!repliesContainer) {
+    const newRepliesContainer = document.createElement('div');
+    newRepliesContainer.className = 'replies-container';
+    commentItem.appendChild(newRepliesContainer);
+    return showReplyForm(commentItem, modalContent, originalPost);
+    }
+
+    if (repliesContainer.querySelector('.reply-form')) return;
+
+    const replyForm = document.createElement('div');
+    replyForm.className = 'reply-form';
+    replyForm.innerHTML = `
+    <img src="../socmed/img/jebel.jpg" class="comment-avatar" alt="You">
+    <input type="text" class="reply-input" placeholder="Write a reply...">
+    <button class="reply-button">Reply</button>
+    `;
+
+    repliesContainer.appendChild(replyForm);
+    const replyInput = replyForm.querySelector('.reply-input');
+    replyInput.focus();
+
+    const replyButton = replyForm.querySelector('.reply-button');
+    replyButton.addEventListener('click', function() {
+    const replyText = replyInput.value.trim();
+    if (replyText) {
+    addReply(modalContent, originalPost, commentItem, 'You', replyText, '../socmed/img/jebel.jpg');
+    replyForm.remove();
+    }
+    });
+
+    replyInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+    const replyText = e.target.value.trim();
+    if (replyText) {
+    addReply(modalContent, originalPost, commentItem, 'You', replyText, '../socmed/img/jebel.jpg');
+    replyForm.remove();
+    }
+    }
+    });
+    }
+
+    // Helper function to find a comment by its text
+    function findCommentByText(post, text) {
+    const comments = post.querySelectorAll('.comment-item');
+    for (const comment of comments) {
+    const commentText = comment.querySelector('.comment-text')?.textContent;
+    if (commentText === text) {
+    return comment;
+    }
+    }
+    return null;
+    }
 
     // Function to add a comment to a post
     function addComment(post, author, text, image) {
-      const commentsSection = post.querySelector('.comments-section');
-      if (!commentsSection) return;
-      
-      const highlightComment = commentsSection.querySelector('.highlight-comment');
-      const allComments = commentsSection.querySelector('.all-comments');
-      const viewCommentsLink = commentsSection.querySelector('.view-comments');
-      const commentCount = commentsSection.querySelector('.comment-count');
-      
-      // Create comment element
-      const commentElement = document.createElement('div');
-      commentElement.className = 'comment-item d-flex align-items-center';
-      commentElement.innerHTML = `
-        <img src="${image}" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="${author}">
-        <div>
-          <p class="mb-0 small"><strong>${author}</strong> ${text}</p>
-        </div>
-      `;
-      
-      // Add to all comments container
-      if (allComments) {
-        allComments.appendChild(commentElement);
-      }
-      
-      // Update comment count
-      if (commentCount) {
-        const currentCount = parseInt(commentCount.textContent) || 0;
-        const newCount = currentCount + 1;
-        commentCount.textContent = newCount;
-      }
-      
-      // Update highlight comment (show most recent)
-      if (highlightComment) {
-        const commentAuthor = highlightComment.querySelector('.comment-author');
-        const commentText = highlightComment.querySelector('.comment-text');
-        const commentImg = highlightComment.querySelector('img');
-        
-        if (commentAuthor) commentAuthor.textContent = author;
-        if (commentText) commentText.textContent = text;
-        if (commentImg) commentImg.src = image;
-        
-        highlightComment.classList.remove('d-none');
-      }
-      
-      // Show elements if this is the first comment
-      if (viewCommentsLink && viewCommentsLink.classList.contains('d-none') && commentCount && parseInt(commentCount.textContent) === 1) {
-        viewCommentsLink.classList.remove('d-none');
-        if (allComments) allComments.classList.add('d-none');
-      }
-      
-      // Update view comments text
-      if (viewCommentsLink && commentCount) {
-        viewCommentsLink.textContent = `View all ${commentCount.textContent} comments`;
-      }
+    const commentsSection = post.querySelector('.comments-section');
+    if (!commentsSection) return;
+
+    const highlightComment = commentsSection.querySelector('.highlight-comment');
+    const allComments = commentsSection.querySelector('.all-comments');
+    const viewCommentsLink = commentsSection.querySelector('.view-comments');
+    const commentCount = commentsSection.querySelector('.comment-count');
+
+    // Create comment element
+    const commentElement = document.createElement('div');
+    commentElement.className = 'comment-item';
+    commentElement.innerHTML = `
+    <img src="${image}" class="comment-avatar" alt="${author}">
+    <div class="comment-content">
+      <div class="comment-header">
+        <span class="comment-author">${author}</span>
+        <span class="comment-time">just now</span>
+      </div>
+      <p class="comment-text">${text}</p>
+      <div class="comment-actions">
+        <button class="comment-action like-comment">
+          <i class="fa-regular fa-heart"></i> Like
+        </button>
+        <button class="comment-action reply-btn">
+          <i class="fa-regular fa-comment"></i> Reply
+        </button>
+      </div>
+    </div>
+    `;
+
+    // Add to all comments container
+    if (allComments) {
+    allComments.appendChild(commentElement);
+    } else {
+    // Create all comments container if it doesn't exist
+    const newAllComments = document.createElement('div');
+    newAllComments.className = 'all-comments';
+    newAllComments.appendChild(commentElement);
+    commentsSection.insertBefore(newAllComments, commentsSection.querySelector('.add-comment'));
     }
 
-    // Initialize sample comments for existing posts
-    document.addEventListener('DOMContentLoaded', function() {
-      // For the existing post in your HTML
-      const firstPost = document.querySelector('.post-box');
-      if (firstPost) {
-        addComment(firstPost, 'Claidy Taguran', 'Nice photo!', '../socmed/img/claidy.jpg');
-        addComment(firstPost, 'Kyle Grapa', 'Looking good!', '../socmed/img/kyle.jpg');
-      }
-      
-      // For dynamically added posts
-      document.getElementById('postContent')?.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          postStatus();
-        }
-      });
-      
-      // Add click handler to all comment buttons
-      document.querySelectorAll('.comment-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const postElement = btn.closest('.post-box');
-          showPostInModal(postElement);
-        });
-      });
+    // Update comment count
+    if (commentCount) {
+    const currentCount = parseInt(commentCount.textContent) || 0;
+    const newCount = currentCount + 1;
+    commentCount.textContent = newCount;
+    } else {
+    // Create comment count if it doesn't exist
+    const newCommentCount = document.createElement('span');
+    newCommentCount.className = 'comment-count';
+    newCommentCount.textContent = '1';
+
+    const newViewCommentsLink = document.createElement('a');
+    newViewCommentsLink.href = '#';
+    newViewCommentsLink.className = 'view-comments';
+    newViewCommentsLink.textContent = 'View all 1 comment';
+    newViewCommentsLink.appendChild(newCommentCount);
+
+    if (highlightComment) {
+    commentsSection.insertBefore(newViewCommentsLink, highlightComment.nextSibling);
+    } else {
+    commentsSection.insertBefore(newViewCommentsLink, commentsSection.querySelector('.add-comment'));
+    }
+    }
+
+    // Update highlight comment (show most recent)
+    if (highlightComment) {
+    highlightComment.classList.remove('d-none');
+    const commentAuthor = highlightComment.querySelector('.comment-author');
+    const commentTextEl = highlightComment.querySelector('.comment-text');
+    const commentImg = highlightComment.querySelector('img');
+
+    if (commentAuthor) commentAuthor.textContent = author;
+    if (commentTextEl) commentTextEl.textContent = text;
+    if (commentImg) commentImg.src = image;
+    }
+
+    // Show elements if this is the first comment
+    if (viewCommentsLink && viewCommentsLink.classList.contains('d-none') && commentCount &&
+    parseInt(commentCount.textContent) === 1) {
+    viewCommentsLink.classList.remove('d-none');
+    if (allComments) allComments.classList.add('d-none');
+    }
+
+    // Update view comments text
+    if (viewCommentsLink && commentCount) {
+    viewCommentsLink.textContent = `View all ${commentCount.textContent} comments`;
+    }
+
+    // Setup interactions for the new comment
+    setupCommentInteractions(commentElement);
+    }
+
+    // Function to add a reply to a comment
+    function addReply(modalContent, originalPost, commentItem, author, text, image) {
+    // Create reply element
+    const replyElement = document.createElement('div');
+    replyElement.className = 'comment-item';
+    replyElement.innerHTML = `
+    <img src="${image}" class="comment-avatar" alt="${author}">
+    <div class="comment-content">
+      <div class="comment-header">
+        <span class="comment-author">${author}</span>
+        <span class="comment-time">just now</span>
+      </div>
+      <p class="comment-text">${text}</p>
+      <div class="comment-actions">
+        <button class="comment-action like-comment">
+          <i class="fa-regular fa-heart"></i> Like
+        </button>
+        <button class="comment-action reply-btn">
+          <i class="fa-regular fa-comment"></i> Reply
+        </button>
+      </div>
+    </div>
+    `;
+
+    // Find or create replies container
+    let repliesContainer = commentItem.querySelector('.replies-container');
+    if (!repliesContainer) {
+    repliesContainer = document.createElement('div');
+    repliesContainer.className = 'replies-container';
+    commentItem.appendChild(repliesContainer);
+    }
+
+    // Add reply to modal
+    repliesContainer.appendChild(replyElement);
+
+    // Find corresponding comment in original post and add reply there
+    if (originalPost) {
+    const commentText = commentItem.querySelector('.comment-text')?.textContent;
+    if (commentText) {
+    const originalComment = findCommentByText(originalPost, commentText);
+    if (originalComment) {
+    const originalReplyElement = replyElement.cloneNode(true);
+
+    let originalRepliesContainer = originalComment.querySelector('.replies-container');
+    if (!originalRepliesContainer) {
+    originalRepliesContainer = document.createElement('div');
+    originalRepliesContainer.className = 'replies-container';
+    originalComment.appendChild(originalRepliesContainer);
+    }
+
+    originalRepliesContainer.appendChild(originalReplyElement);
+    setupCommentInteractions(originalReplyElement);
+    }
+    }
+    }
+
+    // Setup interactions for the modal reply
+    setupCommentInteractions(replyElement);
+    }
+
+    // Setup interactions for a comment
+    function setupCommentInteractions(commentElement) {
+    // Like button
+    const likeBtn = commentElement.querySelector('.like-comment');
+    if (likeBtn) {
+    likeBtn.addEventListener('click', function() {
+    const icon = likeBtn.querySelector('i');
+    icon.classList.toggle('fa-regular');
+    icon.classList.toggle('fa-solid');
+    icon.classList.toggle('heart-beat');
+    likeBtn.classList.toggle('liked');
     });
-  </script>
+    }
+
+    // Reply button
+    const replyBtn = commentElement.querySelector('.reply-btn');
+    if (replyBtn) {
+    replyBtn.addEventListener('click', function() {
+    const post = commentElement.closest('.post-box');
+    const modalContent = commentElement.closest('.modal-post-content');
+
+    if (modalContent) {
+    // In modal view
+    const originalPost = document.querySelector('.post-box');
+    showReplyForm(commentElement, modalContent, originalPost);
+    } else {
+    // In main view
+    showReplyForm(commentElement, null, null);
+    }
+    });
+    }
+    }
+
+    // Initialize existing posts
+    document.querySelectorAll('.post-box').forEach(post => {
+    setupPostInteractions(post);
+    });
+
+    // Initialize sample comments for existing posts
+    const firstPost = document.querySelector('.post-box');
+    if (firstPost) {
+    updateCommentCounts(firstPost);
+    }
+
+    // Post button event listener
+    document.getElementById('postButton')?.addEventListener('click', postStatus);
+
+    // Post input enter key
+    document.getElementById('postContent')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+    postStatus();
+    }
+    });
+
+    // Close notification dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+    const notifBtn = document.getElementById('notificationBtn');
+    const notifDropdown = document.getElementById('notifDropdown');
+
+    if (notifBtn && notifDropdown &&
+    !notifBtn.contains(event.target) &&
+    !notifDropdown.contains(event.target) &&
+    !notifDropdown.classList.contains('d-none')) {
+    notifDropdown.classList.add('d-none');
+    }
+    });
+    });
+    </script>
   <script src="../socmed/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
